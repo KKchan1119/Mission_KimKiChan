@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -58,5 +59,11 @@ public class LikeablePersonController {
         }
 
         return "usr/likeablePerson/list";
+    }
+    @GetMapping("/list")
+    public String DeleteList(@RequestParam("id") int id) throws Exception{
+
+        LikeablePersonService.ListDelete(id);
+        return rq.redirectWithMsg("/LikeablePerson/list", "해당 목록이 삭제되었습니다.");
     }
 }
