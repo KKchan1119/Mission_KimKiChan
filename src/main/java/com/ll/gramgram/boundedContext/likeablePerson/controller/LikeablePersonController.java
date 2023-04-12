@@ -96,4 +96,10 @@ public class LikeablePersonController {
         return rq.redirectWithMsg("/LikeablePerson/list", "해당 목록이 삭제되었습니다.");
     }
 
+
+    @GetMapping("/list")
+    public ResponseEntity<Boolean> checkList(@PathVariable String id){
+        return ResponseEntity.ok(LikeablePersonService.checkList(id));
+    }
+
 }

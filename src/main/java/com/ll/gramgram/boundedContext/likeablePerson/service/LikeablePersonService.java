@@ -29,9 +29,7 @@ public class LikeablePersonService {
         if (member.getInstaMember().getUsername().equals(username)) {
             return RsData.of("F-1", "본인을 호감상대로 등록할 수 없습니다.");
         }
-        if(member.getInstaMember().getUsername().equals(likeablePersonRepository)){
-            return RsData.of("F-1", "중복된대상은 호감표시 할 수 없습니다.");
-        }
+
         InstaMember fromInstaMember = member.getInstaMember();
         InstaMember toInstaMember = instaMemberService.findByUsernameOrCreate(username).getData();
 
@@ -87,6 +85,10 @@ public class LikeablePersonService {
 
     public static void ListDelete(int id) throws Exception{
         LikeablePerson.ListDelete(id);
+    }
+
+    public static boolean checkList(String id){
+        return LikeablePersonRepository.existsById(id);
     }
 
 }
