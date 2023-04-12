@@ -9,10 +9,18 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 
@@ -63,6 +71,7 @@ public class LikeablePersonController {
         return "usr/likeablePerson/list";
     }
 
+
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
@@ -78,4 +87,13 @@ public class LikeablePersonController {
 
         return rq.redirectWithMsg("/likeablePerson/list", deleteRsData);
     }
+
+
+    @GetMapping("/list")
+    public String DeleteList(@RequestParam("id") int id) throws Exception{
+
+        LikeablePersonService.ListDelete(id);
+        return rq.redirectWithMsg("/LikeablePerson/list", "해당 목록이 삭제되었습니다.");
+    }
+
 }
